@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册页面</title>
+    <link rel="stylesheet" href="../css/form.css">
+</head>
+<body>
+    <div class="wp">
+        <h1>用户注册</h1>
+        <hr>
+        <br>
+        <form action="../api/reg_login_insert.php" method="get">
+            <div>
+                账号：<input id="username" name="username" type="text">
+            </div>
+            <br>
+            <div>
+                密码：<input id="password" name="password" type="password">
+            </div>
+            <br>
+            <div>
+                邮箱：<input type="text" name="email">
+            </div>            
+            <br>
+            <div>
+                <lable>性别：
+                    <input type="radio" name="gender" value="男">男               
+                    <input type="radio" name="gender" value="女">女
+                </lable>
+            </div>
+            <br>
+            <div>
+                学历：
+                <select name="edu">
+                    <option value="研究生">研究生</option>
+                    <option value="本科">本科</option>
+                    <option value="专科" selected="selected">专科</option>
+                    <option value="高中">高中</option>
+                </select>
+            </div>
+            <br>
+            <div>
+                介绍:
+                <br>
+                <textarea name="desc" id="" cols="50" rows="10"></textarea>
+            </div>
+            <br>
+            <div>
+                爱好:&nbsp;&nbsp;
+                <input name="hobbies[]" value="旅游" type="checkbox">旅游
+                <input name="hobbies[]" value="跑步" type="checkbox">跑步
+                <input name="hobbies[]" value="音乐" type="checkbox">音乐
+                <input name="hobbies[]" value="美食" type="checkbox">美食
+            </div>
+            
+            <br>
+            <div>
+                <label>照片：</label>
+                <input type="file" name="pic">
+            </div>
+            <br>
+           <!--  <button type="button">立即注册</button> -->
+            <div>
+                <input type="submit" id="loginBtn" value="注册">
+                <input type="reset" value="清空">
+                <input type="button" id="myBtn" value="返回">
+            </div>      
+        </form>
+        <script src="../js/lib/jquery/dist/jquery.min.js"></script>
+        <script>
+            $myBtn=$("#myBtn").on('click',function(){
+                // history.back();//只能返回上一步的历史操作。
+                location.href="form1.html";//可以返回到指定的页面
+            });
+            /*function checkForm(){
+
+                var $user=$("#username"),
+                    $pswd=$("#password");
+                if($.trim($user.val()).length === 0){
+                    alert("账号不能为空");
+                    $user.focus();
+                    return false;
+                }
+                 if($.trim($pswd.val()).length === 0){
+                    alert("密码不能为空");
+                    $pswd.focus();
+                    return false;
+                }
+
+                return true;
+            }*/
+        </script>
+    </div>
+
+</body>
+
+</html>

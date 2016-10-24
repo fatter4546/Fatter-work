@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: "微软雅黑";
+    background-color: pink;
+}
+ul>li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+.wp{
+    width: 400px;
+    margin:50px auto;
+}
+button{
+    width: 150px;
+    height: 40px;
+    line-height: 30px;
+    margin: 0 100px;
+    border-radius: 5px;
+    font-size: 20px;
+    border-color: rgb(251,232,0);
+    background-color: rgb(251,232,0);
+}

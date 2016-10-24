@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户登录</title>
+    <link rel="stylesheet" href="css/form.css">
+</head>
+<body>
+    <!-- //表单验证：非空验证、长足验证、格式验证 -->
+    <!-- 表单验证:1)阻止表单提交2验证表单是否为空,账号中不能有空格。表单中有action属性，是把表单提交到php中，有action是提交到后面属性中的php，没有就提交到当前页面。method是表单提交的方式提交的接口地址，后台写post则写post，后台写get则写get。一般会有接口文档。 -->
+    
+    <div class="wp">
+        <h1>用户登录</h1>
+        <hr>
+        <form action="api/login_demo.php" method="get" onsubmit="return checkForm()">
+            <div>
+                账号：<input id="username" name="user" type="text">
+            </div>
+            <br>
+            <div>
+                密码：<input id="password" name="key" type="password">
+            </div>
+            <br>
+            <div>
+                <input type="submit" id="loginBtn" value="登录">
+                <input type="reset" value="清空">
+            </div>
+    </div>
+
+    </form> 
+    <script src="js/lib/jquery/dist/jquery.min.js"></script>
+    <script>
+      /*  function checkForm(){
+
+            var $user=$("#username"),
+                $pswd=$("#password");
+            if($.trim($user.val()).length === 0){
+                alert("账号不能为空");
+                $user.focus();
+                return false;
+            }
+             if($.trim($pswd.val()).length === 0){
+                alert("密码不能为空");
+                $pswd.focus();
+                return false;
+            }
+
+            return true;
+        }*/
+    </script>
+</body>
+</html>
