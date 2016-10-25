@@ -10,7 +10,7 @@
         <h1>用户注册</h1>
         <hr>
         <br>
-        <form action="../api/reg_login_insert.php" method="get">
+        <form action="../api/reg_login_insert.php" method="post" onsubmit="return checkForm()";>
             <div>
                 账号：<input id="username" name="username" type="text">
             </div>
@@ -20,22 +20,23 @@
             </div>
             <br>
             <div>
-                邮箱：<input type="text" name="email">
+                邮箱：<input id="email" type="text" name="email">
             </div>            
             <br>
             <div>
                 <lable>性别：
-                    <input type="radio" name="gender" value="男">男               
+                    <input type="radio" name="gender" value="男" checked>男               
                     <input type="radio" name="gender" value="女">女
                 </lable>
             </div>
             <br>
             <div>
                 学历：
-                <select name="edu">
+                <select name="edu" id="edu">
+                    <option value="0">请选择</option>
                     <option value="研究生">研究生</option>
                     <option value="本科">本科</option>
-                    <option value="专科" selected="selected">专科</option>
+                    <option value="专科">专科</option>
                     <option value="高中">高中</option>
                 </select>
             </div>
@@ -43,10 +44,12 @@
             <div>
                 介绍:
                 <br>
-                <textarea name="desc" id="" cols="50" rows="10"></textarea>
+                <textarea name="desc" id="descs" cols="50" rows="10" onKeyDown="textCounter(desc,remLen,50);" onKeyUp="textCounter(desc,remLen,50);"></textarea>
+                <br>
+                <input type="text" name="remLen" style="background-color: pink; border:none; width:18px; font-size: 16px;" value="0" readonly="readonly">/50
             </div>
             <br>
-            <div>
+            <div id="hobbies">
                 爱好:&nbsp;&nbsp;
                 <input name="hobbies[]" value="旅游" type="checkbox">旅游
                 <input name="hobbies[]" value="跑步" type="checkbox">跑步
@@ -69,27 +72,90 @@
         </form>
         <script src="../js/lib/jquery/dist/jquery.min.js"></script>
         <script>
+
             $myBtn=$("#myBtn").on('click',function(){
-                // history.back();//只能返回上一步的历史操作。
                 location.href="form1.html";//可以返回到指定的页面
             });
-            /*function checkForm(){
+            
+            function checkForm(){
+                var data={
+                    username:$("#username").val(),
+                    password:$("#password").val(),
+                    email:$("#email").val(),
+                    hobbies:$("#hobbies input[type=checkbox]"),
+                    edu:$("#edu").val(),
+                    descs:$("descs").val()
+                };
 
-                var $user=$("#username"),
-                    $pswd=$("#password");
-                if($.trim($user.val()).length === 0){
-                    alert("账号不能为空");
-                    $user.focus();
+                
+                // 验证账号
+                
+                var nameLenRegExp = /^[a-zA-Z][0-9a-zA-Z]{5,11}$/;
+                
+                if($.trim(data.username) == ''){
+                    alert('账号不能为空，同时也不可以有空格');
+                    return false;
+                };
+
+                if(!nameLenRegExp.test(data.username)){
+                    alert('账号要以字母开头字母和数字的组合且账号长度只能是6-10位');
+                    return false;
+                };
+                //验证密码
+                if ($.trim(data.password) == ''){
+                    alert('密码不能为空');
                     return false;
                 }
-                 if($.trim($pswd.val()).length === 0){
-                    alert("密码不能为空");
-                    $pswd.focus();
-                    return false;
-                }
+                //验证邮箱
+                var emailRegExp = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
-                return true;
-            }*/
+                if (!emailRegExp.test(data.email)) {
+                    alert('邮箱格式不正确！');
+                    return false;
+                };
+
+                //验证兴趣爱好
+                var hobbiesFlag = true;
+
+                $.each(data.hobbies, function(i, item) {
+                    if (item.checked) {
+                        hobbiesFlag = false;
+                    }
+                });
+
+                if (hobbiesFlag) {
+                    alert('至少选择一个爱好！');
+                    return false;
+                };
+
+                //验证学历
+                if(data.edu == 0){
+                    alert('学历必须选择')
+                    return false;
+                };
+
+                // return false;          
+            };
+            //介绍需在50字以内。同时输入几个数字显示几个
+               function textCounter(field,countfield,maxlimit){
+                //3个参数，表单名字，表单域元素名，限制字符长度；
+                    if(field.value.length>maxlimit){
+                        
+                        field.value=field.value.substring(0,maxlimit);
+                        
+                        alert('输入数值不能超过50个');
+
+                    }
+                    //如果元素区字符数大于最大字符数，按照最大字符数截断
+                    
+                    else {
+                    
+                    //在计数区文本框内显示剩余的字符数
+                     
+                        countfield.value=field.value.length;
+                    
+                    };
+               };
         </script>
     </div>
 
